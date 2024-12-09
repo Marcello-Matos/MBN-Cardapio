@@ -61,9 +61,14 @@
         });
 
         alert('pedido enviado com sucesso!');
+        cartModal.style.display = "none";
+        
       } catch (error) {
         console.error('Erro ao adicionar documento:', error);
       }
+     cart = [];
+     updateCartModal(); // Atualiza o modal
+     updateCartCounter(); // Atualiza o contador de itens no carrinho
     });        
 </script>
   
@@ -509,27 +514,35 @@
   <!-- FIM DO MENU END -->
 
   <!-- START MODAL CART -->
-  <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] flex items-center justify-center hidden" id="cart-modal">
-    <form id="send-form">
-
-      <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
-        <h2 class="text-center font-bold text-2xl mb-2">Meu Carrinho</h2>
-        <div id="cart-items" class="flex justify-between mb-2 flex-col"></div>
-        <p class="font-bold">Total: <span id="cart-total">Free</span></p>
-        <p class="font-bold mt-3">Número da Mesa:<span id="table-number"></span></p>
-        <p class="text-red-500 hidden" id="address-warn">
-          Digite o número da mesa
-        </p>
-        <div class="flex items-center justify-between mt-5 w-full">
-          <button id="close-model-btn">Fechar</button>
-          <button class="bg-green-500 text-white px-4 rounded" type="submit">
-            Finalizar Pedido
-          </button>
-        </div>
+<div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] flex items-center justify-center hidden" id="cart-modal">
+  <form id="send-form">
+    <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
+      <h2 class="text-center font-bold text-2xl mb-2">Meu Carrinho</h2>
+      <div id="cart-items" class="flex justify-between mb-2 flex-col"></div>
+      <p class="font-bold">Total: <span id="cart-total">Free</span></p>
+      <p class="font-bold mt-3">Número da Mesa:<span id="table-number"></span></p>
+      <p class="text-red-500 hidden" id="address-warn">
+        Digite o número da mesa
+      </p>
+      <div class="flex items-center justify-between mt-5 w-full">
+        <button id="close-model-btn" type="button">Fechar</button> <!-- Alterado para type="button" -->
+        <button class="bg-green-500 text-white px-4 rounded" type="submit">
+          Finalizar Pedido
+        </button>
       </div>
-    </form>
-  </div>
-  <!-- END MODAL CART -->
+      <style>
+        button:active {
+              transform: translateY(2px); 
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+          }
+          button {
+              transition: transform 0.2s ease, box-shadow 0.2s ease; 
+          }
+      </style>
+    </div>
+  </form>
+</div>
+<!-- END MODAL CART -->
 
   <!-- START BUTTOON CART FOOTER -->
   <footer class="w-full bg-red-500 py-3 fixed bottom-0 z-40 flex items justify-center">

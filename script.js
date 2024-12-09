@@ -29,7 +29,7 @@ cartModal.addEventListener("click", function (event) {
 
 // Fechar o modal do carrinho ao clicar no botão de fechar
 closeModalBtn.addEventListener("click", function () {
-  cartModal.style.display = "none"; // Fecha o modal
+ cartModal.style.display = "none"; // Fecha o modal
 });
 
 // Evento para adicionar item no carrinho ao clicar no botão de "Adicionar ao Carrinho"
@@ -114,18 +114,13 @@ function decreaseItem(name) {
 // Função para limpar os pedidos
 
 function limparPedidos() {
-
   const container = document.getElementById('pedidos-container');
-
   container.innerHTML = ''; // Limpa o conteúdo do contêiner
 
 }
 // Adiciona o evento de clique ao botão
 
-document.getElementById('limpar-pedidos').addEventListener('click', limparPedidos);
-
-
+//document.getElementById('limpar-pedidos').addEventListener('click', limparPedidos);
 // Chama a função para gerar os pedidos
-
-gerarPedidos();
+//gerarPedidos();
 

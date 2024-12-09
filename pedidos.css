@@ -11,6 +11,35 @@
   transition: transform 0.2s ease;
 }
 
+.button-refresh {
+  cursor: pointer;
+}
+
+.button-refresh-container {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.button-refresh {
+  padding: 10px 20px;
+  background-color: #F27507; /* Azul padrão */
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button-refresh:hover {
+  background-color: #8C4404; /* Azul mais escuro ao passar o mouse */
+}
+
+.button-refresh-container {
+  display: flex;
+  margin-top: 20px; /* Espaçamento superior */
+}
+
 .pedido-destaque p,
 .pedido-destaque ul {
   margin: 0; /* Remove margens padrão */
