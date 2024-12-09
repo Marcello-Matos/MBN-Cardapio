@@ -1954,7 +1954,7 @@ video {
 }
 
 .bg-home {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('/assets/fundo.png');
+  background-image: url('/assets/fundo-1.png');
 }
 
 .decoration-slice {
