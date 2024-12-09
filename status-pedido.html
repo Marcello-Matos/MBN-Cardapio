@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fontes e Estilização Externa -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="pedidos.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <link href="./styles/output.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <link href="./styles/output.css" rel="stylesheet" />
+
+  <title>Status Recebidos</title>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <header class="header-section w-full h-[420px] bg-blue-500 bg-cover bg-center">
+    <div class="header-content w-full h-full text-center text-white flex flex-col justify-center items-center">
+    </div>
+  </header>
+
+  <!-- Título da Seção -->
+  <main class="main-container px-6 mt-8">
+    <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Status do Pedido</h2>
+    
+    <!-- Container Principal para Pedidos -->
+    <div id="pedidos" class="max-w-7xl mx-auto px-4 mb-16">
+      <div id="pedidos-container" class="bg-white shadow-lg rounded-lg p-4">
+        <!-- Pedidos irão ser adicionados aqui dinamicamente pelo JS -->
+      </div>
+    </div>
+  </main>
+  
+  <!-- RODAPÉ -->
+  <footer class="footer-section bg-gray-800 text-white py-4 text-center">
+    <p>&copy; 2024 Todos os direitos reservados</p>
+  </footer>
+
+  <!-- Firebase e JS Importação -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDvnrGRrLGUBFKp8xh9ngQn1uKn9QUGq6s",
+      authDomain: "cardapio-mbn.firebaseapp.com",
+      projectId: "cardapio-mbn",
+      storageBucket: "cardapio-mbn.firebasestorage.app",
+      messagingSenderId: "688708152488",
+      appId: "1:688708152488:web:1e12adcc98ba90046c669d"
+    };
+
+    const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function buscarPedidos() {
+  try {
+    const pedidosRef = collection(db, "pedidos");
+    const querySnapshot = await getDocs(pedidosRef);
+    const pedidosContainer = document.getElementById('pedidos-container');
+    pedidosContainer.innerHTML = '';
+
+    querySnapshot.forEach(doc => {
+      const pedido = doc.data();
+      const pedidoDiv = document.createElement('div');
+      pedidoDiv.classList.add('pedido-destaque');
+      
+      // Formatar a data para o formato brasileiro
+      const dataFormatada = new Date(pedido.pedido.datadeagora).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+
+      pedidoDiv.innerHTML = `
+        <p><strong>Pedido:</strong></p> 
+        <ul>
+          ${pedido.pedido.pedido.map(item => `
+            <li>${item.name} - Quantidade: ${item.quantity}</li>
+          `).join('')}
+        </ul>
+        <p><strong>Mesa:</strong> ${pedido.pedido.mesa}</p>
+        <p><strong>Data:</strong> ${dataFormatada}</p>
+        <p><strong>Status:</strong> 
+          <span class="status status-recebido">Recebido</span>
+        </p>
+      `;
+      pedidosContainer.appendChild(pedidoDiv);
+    });
+  } catch (error) {
+    console.error("Erro ao buscar os pedidos:", error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  buscarPedidos();
+});
+  </script>
+</body>
+</html>

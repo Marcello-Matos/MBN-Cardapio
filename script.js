@@ -110,3 +110,22 @@ function decreaseItem(name) {
 }
 
 // Função para verificar se o restaurante está aberto
+
+// Função para limpar os pedidos
+
+function limparPedidos() {
+
+  const container = document.getElementById('pedidos-container');
+
+  container.innerHTML = ''; // Limpa o conteúdo do contêiner
+
+}
+// Adiciona o evento de clique ao botão
+
+document.getElementById('limpar-pedidos').addEventListener('click', limparPedidos);
+
+
+// Chama a função para gerar os pedidos
+
+gerarPedidos();
+
